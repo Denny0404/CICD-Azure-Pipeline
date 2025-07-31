@@ -31,3 +31,16 @@ stages:
     - script: |
         dotnet test --configuration Release
       displayName: 'Run Unit Tests'
+
+- stage: Deploy
+  displayName: 'Deploy to Azure'
+  dependsOn: Test
+  condition: succeeded()
+  jobs:
+  - job: Deploy
+    displayName: 'Simulated Deploy Step'
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - script: echo "Manual deploy will be handled using Azure CLI."
+      displayName: 'Deploy placeholder'
